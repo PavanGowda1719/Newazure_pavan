@@ -77,6 +77,93 @@
 							},
 							"firstRowOnly": false
 						}
+					},
+					{
+						"name": "ForEach_fintech",
+						"type": "ForEach",
+						"dependsOn": [
+							{
+								"activity": "Lookup_sql_table",
+								"dependencyConditions": [
+									"Succeeded"
+								]
+							}
+						],
+						"userProperties": [],
+						"typeProperties": {
+							"items": {
+								"value": "@activity('Lookup_sql_table').output.value",
+								"type": "Expression"
+							},
+							"isSequential": true,
+							"activities": [
+								{
+									"name": "Copy_data_fintech",
+									"type": "Copy",
+									"dependsOn": [],
+									"policy": {
+										"timeout": "0.12:00:00",
+										"retry": 0,
+										"retryIntervalInSeconds": 30,
+										"secureOutput": false,
+										"secureInput": false
+									},
+									"userProperties": [],
+									"typeProperties": {
+										"source": {
+											"type": "AzureSqlSource",
+											"sqlReaderQuery": {
+												"value": "@concat('select * from', item().SchemaName,'.',item().TableName)\n",
+												"type": "Expression"
+											},
+											"queryTimeout": "02:00:00",
+											"partitionOption": "None"
+										},
+										"sink": {
+											"type": "ParquetSink",
+											"storeSettings": {
+												"type": "AzureBlobFSWriteSettings"
+											},
+											"formatSettings": {
+												"type": "ParquetWriteSettings"
+											}
+										},
+										"enableStaging": false,
+										"translator": {
+											"type": "TabularTranslator",
+											"typeConversion": true,
+											"typeConversionSettings": {
+												"allowDataTruncation": true,
+												"treatBooleanAsNumber": false
+											}
+										}
+									},
+									"inputs": [
+										{
+											"referenceName": "AzureSql_dataset_newproject",
+											"type": "DatasetReference",
+											"parameters": {}
+										}
+									],
+									"outputs": [
+										{
+											"referenceName": "adlsstorage_dataset_new_project",
+											"type": "DatasetReference",
+											"parameters": {
+												"Tablename": {
+													"value": "@item().TableName",
+													"type": "Expression"
+												},
+												"Schema": {
+													"value": "@item().SchemaName",
+													"type": "Expression"
+												}
+											}
+										}
+									]
+								}
+							]
+						}
 					}
 				],
 				"policy": {
@@ -85,7 +172,8 @@
 				"annotations": []
 			},
 			"dependsOn": [
-				"[concat(variables('workspaceId'), '/datasets/AzureSql_dataset_newproject')]"
+				"[concat(variables('workspaceId'), '/datasets/AzureSql_dataset_newproject')]",
+				"[concat(variables('workspaceId'), '/datasets/adlsstorage_dataset_new_project')]"
 			]
 		},
 		{
@@ -115,11 +203,28 @@
 					"referenceName": "AzureDataLakeStorage_newproject",
 					"type": "LinkedServiceReference"
 				},
+				"parameters": {
+					"Tablename": {
+						"type": "string"
+					},
+					"Schema": {
+						"type": "string"
+					}
+				},
 				"annotations": [],
 				"type": "Parquet",
 				"typeProperties": {
 					"location": {
-						"type": "AzureBlobFSLocation"
+						"type": "AzureBlobFSLocation",
+						"fileName": {
+							"value": "@concat(dataset().Tablename, '.Parquet')",
+							"type": "Expression"
+						},
+						"folderPath": {
+							"value": "@concat('Bronze/',dataset().Schema, '/', dataset().Tablename)",
+							"type": "Expression"
+						},
+						"fileSystem": "fintech"
 					},
 					"compressionCodec": "snappy"
 				},
