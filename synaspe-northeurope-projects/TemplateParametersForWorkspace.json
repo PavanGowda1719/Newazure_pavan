@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+	"contentVersion": "1.0.0.0",
+	"parameters": {
+		"workspaceName": {
+			"value": "synaspe-northeurope-projects"
+		},
+		"AzureDataLakeStorage_newproject_accountKey": {
+			"value": ""
+		},
+		"AzureSqlDatabase_newproject_password": {
+			"value": ""
+		},
+		"synaspe-northeurope-projects-WorkspaceDefaultSqlServer_connectionString": {
+			"value": "Integrated Security=False;Encrypt=True;Connection Timeout=30;Data Source=tcp:synaspe-northeurope-projects.sql.azuresynapse.net,1433;Initial Catalog=@{linkedService().DBName}"
+		},
+		"AzureDataLakeStorage_newproject_properties_typeProperties_url": {
+			"value": "https://adlsaccountnortheurope.dfs.core.windows.net/"
+		},
+		"AzureSqlDatabase_newproject_properties_typeProperties_server": {
+			"value": "sqlservernortheurope-1.database.windows.net"
+		},
+		"AzureSqlDatabase_newproject_properties_typeProperties_database": {
+			"value": "databasenortheurope"
+		},
+		"AzureSqlDatabase_newproject_properties_typeProperties_userName": {
+			"value": "Pavan"
+		},
+		"synaspe-northeurope-projects-WorkspaceDefaultStorage_properties_typeProperties_url": {
+			"value": "https://adlsaccountnortheurope.dfs.core.windows.net"
+		}
+	}
+}
