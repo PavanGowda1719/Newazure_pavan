@@ -1,0 +1,12 @@
+{
+	"name": "AzureSql_dataset_newproject",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase_newproject",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": []
+	}
+}
