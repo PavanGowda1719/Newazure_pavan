@@ -1,5 +1,5 @@
 {
-	"name": "Notebook _fintech_1",
+	"name": "BRONZE TO SILVER LAYER_FINTECH",
 	"properties": {
 		"nbformat": 4,
 		"nbformat_minor": 2,
@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "234b85fd-3c04-4140-bd10-c3bdccb30d9c"
+				"spark.autotune.trackingId": "28470a7d-5385-442f-83b7-2aeadd163f88"
 			}
 		},
 		"metadata": {
@@ -80,8 +80,8 @@
 					"from pyspark.sql.functions import *\r\n",
 					"\r\n",
 					"# Define paths\r\n",
-					"base_path = \"abfss://fintech@airbnbdatagds.dfs.core.windows.net/bronze/fintech/\"\r\n",
-					"output_base_path = \"abfss://fintech@airbnbdatagds.dfs.core.windows.net/silver/fintech/\"\r\n",
+					"base_path = \"abfss://fintech@adlsaccountnortheurope.dfs.core.windows.net/Bronze/fintech/\"\r\n",
+					"output_base_path = \"abfss://fintech@adlsaccountnortheurope.dfs.core.windows.net/Silver/fintech/\"\r\n",
 					"\r\n",
 					"spark.conf.set(\"spark.databricks.delta.schema.autoMerge.enabled\", \"true\")\r\n",
 					"\r\n",
