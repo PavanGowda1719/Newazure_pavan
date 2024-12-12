@@ -64,7 +64,7 @@
 			]
 		},
 		{
-			"name": "[concat(parameters('workspaceName'), '/fintechdata_new_project')]",
+			"name": "[concat(parameters('workspaceName'), '/adlsstorage_dataset_new_project')]",
 			"type": "Microsoft.Synapse/workspaces/datasets",
 			"apiVersion": "2019-06-01-preview",
 			"properties": {
