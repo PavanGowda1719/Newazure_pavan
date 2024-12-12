@@ -1,5 +1,5 @@
 {
-	"name": "fintechdata_new_project",
+	"name": "adlsstorage_dataset_new_project",
 	"properties": {
 		"linkedServiceName": {
 			"referenceName": "AzureDataLakeStorage_newproject",
