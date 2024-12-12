@@ -46,6 +46,24 @@
 	},
 	"resources": [
 		{
+			"name": "[concat(parameters('workspaceName'), '/AzureSql_dataset_newproject')]",
+			"type": "Microsoft.Synapse/workspaces/datasets",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"linkedServiceName": {
+					"referenceName": "AzureSqlDatabase_newproject",
+					"type": "LinkedServiceReference"
+				},
+				"annotations": [],
+				"type": "AzureSqlTable",
+				"schema": [],
+				"typeProperties": {}
+			},
+			"dependsOn": [
+				"[concat(variables('workspaceId'), '/linkedServices/AzureSqlDatabase_newproject')]"
+			]
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/fintechdata_new_project')]",
 			"type": "Microsoft.Synapse/workspaces/datasets",
 			"apiVersion": "2019-06-01-preview",
