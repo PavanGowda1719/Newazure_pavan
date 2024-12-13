@@ -846,6 +846,26 @@
 			"dependsOn": []
 		},
 		{
+			"name": "[concat(parameters('workspaceName'), '/SQL script 1')]",
+			"type": "Microsoft.Synapse/workspaces/sqlscripts",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"content": {
+					"query": "SELECT TOP (100) [account_id]\n,[account_type]\n,[balance]\n,[open_date]\n,[account_age_years]\n FROM [Database1].[dbo].[accounts]",
+					"metadata": {
+						"language": "sql"
+					},
+					"currentConnection": {
+						"databaseName": "Database1",
+						"poolName": "Built-in"
+					},
+					"resultLimit": 5000
+				},
+				"type": "SqlQuery"
+			},
+			"dependsOn": []
+		},
+		{
 			"name": "[concat(parameters('workspaceName'), '/BRONZE TO SILVER LAYER_FINTECH')]",
 			"type": "Microsoft.Synapse/workspaces/notebooks",
 			"apiVersion": "2019-06-01-preview",
@@ -990,6 +1010,108 @@
 						],
 						"outputs": [],
 						"execution_count": null
+					}
+				]
+			},
+			"dependsOn": []
+		},
+		{
+			"name": "[concat(parameters('workspaceName'), '/Notebook 1')]",
+			"type": "Microsoft.Synapse/workspaces/notebooks",
+			"apiVersion": "2019-06-01-preview",
+			"properties": {
+				"nbformat": 4,
+				"nbformat_minor": 2,
+				"bigDataPool": {
+					"referenceName": "sparkpool1",
+					"type": "BigDataPoolReference"
+				},
+				"sessionProperties": {
+					"driverMemory": "28g",
+					"driverCores": 4,
+					"executorMemory": "28g",
+					"executorCores": 4,
+					"numExecutors": 2,
+					"conf": {
+						"spark.dynamicAllocation.enabled": "false",
+						"spark.dynamicAllocation.minExecutors": "2",
+						"spark.dynamicAllocation.maxExecutors": "2",
+						"spark.autotune.trackingId": "8c80ae66-21bb-492d-8bb5-98a8fb179a5d"
+					}
+				},
+				"metadata": {
+					"saveOutput": true,
+					"enableDebugMode": false,
+					"kernelspec": {
+						"name": "synapse_pyspark",
+						"display_name": "Synapse PySpark"
+					},
+					"language_info": {
+						"name": "python"
+					},
+					"a365ComputeOptions": {
+						"id": "/subscriptions/4b8e657e-a5ee-47f9-85b2-8b4bf5f84802/resourceGroups/north_europe_1/providers/Microsoft.Synapse/workspaces/synaspe-northeurope-projects/bigDataPools/sparkpool1",
+						"name": "sparkpool1",
+						"type": "Spark",
+						"endpoint": "https://synaspe-northeurope-projects.dev.azuresynapse.net/livyApi/versions/2019-11-01-preview/sparkPools/sparkpool1",
+						"auth": {
+							"type": "AAD",
+							"authResource": "https://dev.azuresynapse.net"
+						},
+						"sparkVersion": "3.4",
+						"nodeCount": 3,
+						"cores": 4,
+						"memory": 28,
+						"automaticScaleJobs": false
+					},
+					"sessionKeepAliveTimeout": 30
+				},
+				"cells": [
+					{
+						"cell_type": "code",
+						"metadata": {
+							"microsoft": {
+								"language": "python"
+							}
+						},
+						"source": [
+							"%%pyspark\n",
+							"df = spark.sql(\"SELECT * FROM `Database1`.`accounts`\")\n",
+							"df.show(10)"
+						],
+						"outputs": [],
+						"execution_count": 1
+					},
+					{
+						"cell_type": "code",
+						"metadata": {
+							"jupyter": {
+								"source_hidden": false,
+								"outputs_hidden": false
+							},
+							"nteract": {
+								"transient": {
+									"deleting": false
+								}
+							}
+						},
+						"source": [
+							"lake_db_path = \"abfss://fintech@adlsaccountnortheurope.dfs.core.windows.net/Gold/fintech/\"\r\n",
+							"table_name = \"dim_customers\"\r\n",
+							"lake_database_name = \"Database1\"  # Replace with your Lake Database name\r\n",
+							"\r\n",
+							"# Register the table\r\n",
+							"spark.sql(f\"\"\"\r\n",
+							"CREATE TABLE IF NOT EXISTS {lake_database_name}.{table_name}\r\n",
+							"USING DELTA\r\n",
+							"LOCATION '{lake_db_path}{table_name}'\r\n",
+							"\"\"\")\r\n",
+							"\r\n",
+							"\r\n",
+							""
+						],
+						"outputs": [],
+						"execution_count": 4
 					}
 				]
 			},
@@ -1374,8 +1496,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "integer"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "account_type",
@@ -1387,8 +1508,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "string"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "balance",
@@ -1401,8 +1521,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "decimal"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "open_date",
@@ -1414,8 +1533,7 @@
 												"DateFormat": "YYYY-MM-DD",
 												"HIVE_TYPE_STRING": "date"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									},
 									{
 										"Name": "account_age_years",
@@ -1426,8 +1544,7 @@
 											"Properties": {
 												"HIVE_TYPE_STRING": "double"
 											}
-										},
-										"DeltaFormatInvalidMessages": []
+										}
 									}
 								],
 								"Format": {
@@ -1450,7 +1567,7 @@
 								},
 								"Properties": {
 									"textinputformat.record.delimiter": ",",
-									"compression": "{\"type\":\"None\",\"level\":\"optimal\"}",
+									"compression": "",
 									"derivedModelAttributeInfo": "{\"attributeReferences\":{}}"
 								},
 								"Compressed": false,
