@@ -1,0 +1,24 @@
+{
+	"name": "SourceDataset_ver",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase_newproject",
+			"type": "LinkedServiceReference"
+		},
+		"parameters": {
+			"cw_table": {
+				"type": "String"
+			}
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "fintech",
+			"table": {
+				"value": "@dataset().cw_table",
+				"type": "Expression"
+			}
+		}
+	}
+}
