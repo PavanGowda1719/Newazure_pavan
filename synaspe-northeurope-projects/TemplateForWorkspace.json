@@ -1036,7 +1036,7 @@
 						"spark.dynamicAllocation.enabled": "false",
 						"spark.dynamicAllocation.minExecutors": "2",
 						"spark.dynamicAllocation.maxExecutors": "2",
-						"spark.autotune.trackingId": "e20e6551-9bf7-4761-bc9f-052cbe1edf90"
+						"spark.autotune.trackingId": "f1e6579d-3331-452c-87f6-83a5c8d67701"
 					}
 				},
 				"metadata": {
@@ -1061,8 +1061,7 @@
 						"sparkVersion": "3.4",
 						"nodeCount": 3,
 						"cores": 4,
-						"memory": 28,
-						"automaticScaleJobs": false
+						"memory": 28
 					},
 					"sessionKeepAliveTimeout": 30
 				},
@@ -1170,7 +1169,7 @@
 							""
 						],
 						"outputs": [],
-						"execution_count": 10
+						"execution_count": 11
 					},
 					{
 						"cell_type": "code",
@@ -1186,12 +1185,12 @@
 							}
 						},
 						"source": [
-							"lake_database_name = \"Database1\"\r\n",
+							"lake_database_name = \"Database2\"\r\n",
 							"spark.sql(f\"SHOW TABLES IN {lake_database_name}\").show()\r\n",
 							""
 						],
 						"outputs": [],
-						"execution_count": 9
+						"execution_count": 12
 					}
 				]
 			},
@@ -1691,7 +1690,7 @@
 							},
 							"Source": {
 								"Provider": "ADLS",
-								"Location": "abfss://fintech@adlsaccountnortheurope.dfs.core.windows.net/Gold",
+								"Location": "abfss://fintech@adlsaccountnortheurope.dfs.core.windows.net/Gold/fintech",
 								"Properties": {
 									"FormatType": "parquet",
 									"LinkedServiceName": "AzureDataLakeStorage_newproject"
