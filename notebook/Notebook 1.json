@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "9a7647bd-907c-4eaf-8b86-70f6915351a0"
+				"spark.autotune.trackingId": "b81da868-2535-44ec-bee7-2280e1464e93"
 			}
 		},
 		"metadata": {
@@ -91,6 +91,83 @@
 					""
 				],
 				"execution_count": 4
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"table_path = \"abfss://fintech@adlsaccountnortheurope.dfs.core.windows.net/Gold/fintech/dim_customers\"\r\n",
+					"\r\n",
+					"# Try reading the Delta table\r\n",
+					"try:\r\n",
+					"    df = spark.read.format(\"delta\").load(table_path)\r\n",
+					"    df.show()\r\n",
+					"    print(\"Delta table exists and is readable!\")\r\n",
+					"except Exception as e:\r\n",
+					"    print(\"Error: Delta table not found or invalid path.\")\r\n",
+					"    print(e)\r\n",
+					""
+				],
+				"execution_count": 5
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"lake_database_name = \"Database2\"\r\n",
+					"table_name = \"dim_customers\"\r\n",
+					"table_path = \"abfss://fintech@adlsaccountnortheurope.dfs.core.windows.net/Gold/fintech/dim_customers\"\r\n",
+					"\r\n",
+					"# Register the table\r\n",
+					"spark.sql(f\"\"\"\r\n",
+					"CREATE TABLE IF NOT EXISTS {lake_database_name}.{table_name}\r\n",
+					"USING DELTA\r\n",
+					"LOCATION '{table_path}'\r\n",
+					"\"\"\")\r\n",
+					"print(f\"Table {lake_database_name}.{table_name} registered successfully!\")\r\n",
+					""
+				],
+				"execution_count": 10
+			},
+			{
+				"cell_type": "code",
+				"metadata": {
+					"jupyter": {
+						"source_hidden": false,
+						"outputs_hidden": false
+					},
+					"nteract": {
+						"transient": {
+							"deleting": false
+						}
+					}
+				},
+				"source": [
+					"lake_database_name = \"Database1\"\r\n",
+					"spark.sql(f\"SHOW TABLES IN {lake_database_name}\").show()\r\n",
+					""
+				],
+				"execution_count": 9
 			}
 		]
 	}
