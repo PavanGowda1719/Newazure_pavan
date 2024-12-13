@@ -1036,7 +1036,7 @@
 						"spark.dynamicAllocation.enabled": "false",
 						"spark.dynamicAllocation.minExecutors": "2",
 						"spark.dynamicAllocation.maxExecutors": "2",
-						"spark.autotune.trackingId": "f1e6579d-3331-452c-87f6-83a5c8d67701"
+						"spark.autotune.trackingId": "ef8a07c6-d948-4da7-b295-c960ad4130b6"
 					}
 				},
 				"metadata": {
@@ -1169,7 +1169,7 @@
 							""
 						],
 						"outputs": [],
-						"execution_count": 11
+						"execution_count": 14
 					},
 					{
 						"cell_type": "code",
@@ -1190,7 +1190,7 @@
 							""
 						],
 						"outputs": [],
-						"execution_count": 12
+						"execution_count": 13
 					}
 				]
 			},
@@ -1690,7 +1690,7 @@
 							},
 							"Source": {
 								"Provider": "ADLS",
-								"Location": "abfss://fintech@adlsaccountnortheurope.dfs.core.windows.net/Gold/fintech",
+								"Location": "abfss://fintech@adlsaccountnortheurope.dfs.core.windows.net/Gold/fintech/dim_customers",
 								"Properties": {
 									"FormatType": "parquet",
 									"LinkedServiceName": "AzureDataLakeStorage_newproject"
