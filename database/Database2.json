@@ -11,7 +11,7 @@
 		},
 		"Source": {
 			"Provider": "ADLS",
-			"Location": "abfss://fintech@adlsaccountnortheurope.dfs.core.windows.net/Gold",
+			"Location": "abfss://fintech@adlsaccountnortheurope.dfs.core.windows.net/Gold/fintech",
 			"Properties": {
 				"FormatType": "parquet",
 				"LinkedServiceName": "AzureDataLakeStorage_newproject"

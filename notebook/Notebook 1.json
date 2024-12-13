@@ -17,7 +17,7 @@
 				"spark.dynamicAllocation.enabled": "false",
 				"spark.dynamicAllocation.minExecutors": "2",
 				"spark.dynamicAllocation.maxExecutors": "2",
-				"spark.autotune.trackingId": "b81da868-2535-44ec-bee7-2280e1464e93"
+				"spark.autotune.trackingId": "f1e6579d-3331-452c-87f6-83a5c8d67701"
 			}
 		},
 		"metadata": {
@@ -147,7 +147,7 @@
 					"print(f\"Table {lake_database_name}.{table_name} registered successfully!\")\r\n",
 					""
 				],
-				"execution_count": 10
+				"execution_count": 11
 			},
 			{
 				"cell_type": "code",
@@ -163,11 +163,11 @@
 					}
 				},
 				"source": [
-					"lake_database_name = \"Database1\"\r\n",
+					"lake_database_name = \"Database2\"\r\n",
 					"spark.sql(f\"SHOW TABLES IN {lake_database_name}\").show()\r\n",
 					""
 				],
-				"execution_count": 9
+				"execution_count": 12
 			}
 		]
 	}
