@@ -215,7 +215,7 @@
 						"type": "IntegrationRuntimeReference"
 					},
 					"body": {
-						"value": "{\"to\" : \"@{pipeline().parameters.to}\"\n\"subject\" : \"@{pipeline().parameters.subsuc}\"\n\"email\" :\"@{pipeline().parameters.emailsuc}\" }",
+						"value": "{\n  \"to\": \"@{pipeline().parameters.to}\",\n  \"subject\": \"@{pipeline().parameters.subsuc}\",\n  \"email\": \"@{pipeline().parameters.emailsuc}\"\n}\n",
 						"type": "Expression"
 					}
 				}
@@ -250,7 +250,7 @@
 						"type": "IntegrationRuntimeReference"
 					},
 					"body": {
-						"value": "{\"to\" : \"@{pipeline().parameters.to}\"\n\"subject\" : \"@{pipeline().parameters.subfail}\"\n\"email\" :\"@{pipeline().parameters.eamilfail}\" }",
+						"value": "{\n\"to\": \"@{pipeline().parameters.to}\",\n\"subject\": \"@{pipeline().parameters.subfail}\",\n\"email\":\"@{pipeline().parameters.eamilfail}\" \n}",
 						"type": "Expression"
 					}
 				}
