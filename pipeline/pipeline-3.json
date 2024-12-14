@@ -184,76 +184,6 @@
 					},
 					"driverSize": "Small"
 				}
-			},
-			{
-				"name": "Web1",
-				"type": "WebActivity",
-				"dependsOn": [
-					{
-						"activity": "Notebook2",
-						"dependencyConditions": [
-							"Succeeded"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"method": "POST",
-					"headers": {
-						"Content-Type": "application/json"
-					},
-					"url": "https://prod-17.northeurope.logic.azure.com:443/workflows/fc1f34359af14ba58ad013796a393702/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=lEHjuiKjZpbZYVqRpQspHXEyiyxF7dHNQxycsP0Zh44",
-					"connectVia": {
-						"referenceName": "AutoResolveIntegrationRuntime",
-						"type": "IntegrationRuntimeReference"
-					},
-					"body": {
-						"value": "{\"to\" : \"@{pipeline().parameters.to}\",\n\"subject\" : \"@{pipeline().parameters.subsuccess}\",\n\"email\" : \"@{pipeline().parameters.emailbodysuccess}\"}\n\n",
-						"type": "Expression"
-					}
-				}
-			},
-			{
-				"name": "Web2",
-				"type": "WebActivity",
-				"dependsOn": [
-					{
-						"activity": "Notebook2",
-						"dependencyConditions": [
-							"Failed"
-						]
-					}
-				],
-				"policy": {
-					"timeout": "0.12:00:00",
-					"retry": 0,
-					"retryIntervalInSeconds": 30,
-					"secureOutput": false,
-					"secureInput": false
-				},
-				"userProperties": [],
-				"typeProperties": {
-					"method": "POST",
-					"headers": {
-						"Content-Type": "\\application/json"
-					},
-					"url": "https://prod-17.northeurope.logic.azure.com:443/workflows/fc1f34359af14ba58ad013796a393702/triggers/When_a_HTTP_request_is_received/paths/invoke?api-version=2016-10-01&sp=%2Ftriggers%2FWhen_a_HTTP_request_is_received%2Frun&sv=1.0&sig=lEHjuiKjZpbZYVqRpQspHXEyiyxF7dHNQxycsP0Zh44",
-					"connectVia": {
-						"referenceName": "AutoResolveIntegrationRuntime",
-						"type": "IntegrationRuntimeReference"
-					},
-					"body": {
-						"value": "{\"to\" : \"@{pipeline().parameters.to}\",\n\"subject\" : \"@{pipeline().parameters.subfailure}\",\n\"email\" : \"@{pipeline().parameters.emailbodyfailure}\" }",
-						"type": "Expression"
-					}
-				}
 			}
 		],
 		"parameters": {
@@ -261,21 +191,21 @@
 				"type": "string",
 				"defaultValue": "pavangowda1799@outlook.com"
 			},
-			"subsuccess": {
+			"subsuc": {
 				"type": "string",
-				"defaultValue": "Reagrding fintech data migration"
+				"defaultValue": "Regarding Funtech migration"
 			},
-			"emailbodysuccess": {
+			"subfail": {
 				"type": "string",
-				"defaultValue": "data migrated successfully"
+				"defaultValue": "Regarding Funtech migration"
 			},
-			"subfailure": {
+			"emailsuc": {
 				"type": "string",
-				"defaultValue": "Reagrding fintech data migration"
+				"defaultValue": "Succesfully migrated"
 			},
-			"emailbodyfailure": {
+			"eamilfail": {
 				"type": "string",
-				"defaultValue": "data migrate failed"
+				"defaultValue": "Failed migrate data"
 			}
 		},
 		"annotations": []
