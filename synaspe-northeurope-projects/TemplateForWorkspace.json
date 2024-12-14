@@ -592,6 +592,28 @@
 				"policy": {
 					"elapsedTimeMetric": {}
 				},
+				"parameters": {
+					"to": {
+						"type": "string",
+						"defaultValue": "pavangowda1799@outlook.com"
+					},
+					"subsuc": {
+						"type": "string",
+						"defaultValue": "Regarding Funtech migration"
+					},
+					"subfail": {
+						"type": "string",
+						"defaultValue": "Regarding Funtech migration"
+					},
+					"emailsuc": {
+						"type": "string",
+						"defaultValue": "Succesfully migrated"
+					},
+					"eamilfail": {
+						"type": "string",
+						"defaultValue": "Failed migrate data"
+					}
+				},
 				"annotations": []
 			},
 			"dependsOn": [
