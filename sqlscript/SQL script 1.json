@@ -2,13 +2,13 @@
 	"name": "SQL script 1",
 	"properties": {
 		"content": {
-			"query": "SELECT TOP (100) [account_id]\n,[account_type]\n,[balance]\n,[open_date]\n,[account_age_years]\n FROM [Database1].[dbo].[accounts]",
+			"query": "CREATE MASTER KEY ENCRYPTION BY PASSWORD = 'Kumar@123';\nOPEN MASTER KEY DECRYPTION BY PASSWORD = 'Kumar@123';",
 			"metadata": {
 				"language": "sql"
 			},
 			"currentConnection": {
-				"databaseName": "Database1",
-				"poolName": "Built-in"
+				"databaseName": "sqlpoolairbnb",
+				"poolName": "sqlpoolairbnb"
 			},
 			"resultLimit": 5000
 		},
